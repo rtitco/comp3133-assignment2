@@ -9,11 +9,11 @@
     <form (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label for="login-username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="login-username" placeholder="Example input placeholder">
+            <input type="text" [formControl]="username" class="form-control" id="login-username" placeholder="Example input placeholder">
         </div>
         <div class="mb-3">
             <label for="login-password" class="form-label">Password</label>
-            <input type="text" class="form-control" id="login-password" placeholder="Another input placeholder" [(ngModel)]="username">
+            <input type="password" [formControl]="password" class="form-control" id="login-password" placeholder="Another input placeholder">
         </div>
 
         <input type="submit" class="form-control btn btn-danger">
@@ -32,7 +32,3 @@
         integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
         crossorigin="anonymous"></script>
 </body>
-
-<!-- By Default, nav brings here -->
-
-<!-- Form Goes Here -->

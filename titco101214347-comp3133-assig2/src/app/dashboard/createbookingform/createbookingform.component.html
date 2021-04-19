@@ -38,18 +38,21 @@
 
     <form (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label for="register-firstName" class="form-label">Hotel Name</label>
-            <input type="text" class="form-control" id="register-firstName" placeholder="Enter a hotel name">
+            <label for="booking-hotelId" class="form-label">Hotel ID</label>
+            <input type="text" [formControl]="hotel_id" class="form-control" id="booking-hotelId" placeholder="Enter a hotel ID">
         </div>
         <div class="mb-3">
-            <label for="register-lastName" class="form-label">Check-In Date</label>
-            <input type="date" class="form-control" id="register-lastName">
+            <label for="booking-checkinDate" class="form-label">Check-In Date</label>
+            <input type="date" [formControl]="booking_start" class="form-control" id="booking-checkinDate">
         </div>
         <div class="mb-3">
-            <label for="register-username" class="form-label">Check-Out Date</label>
-            <input type="date" class="form-control" id="register-username">
+            <label for="booking-checkoutDate" class="form-label">Check-Out Date</label>
+            <input type="date" [formControl]="booking_end" class="form-control" id="booking-checkoutDate">
         </div>
-
+        <div class="mb-3">
+            <label for="booking-userId" class="form-label">Hotel ID</label>
+            <input type="text" [formControl]="user_id" class="form-control" id="booking-userId" placeholder="Enter your User ID">
+        </div>
         <button type="submit" class="mb-1 form-control btn btn-danger">Update</button>
         <a routerLink="/dashboard" class="form-control btn btn-dark">Cancel</a>
     </form>

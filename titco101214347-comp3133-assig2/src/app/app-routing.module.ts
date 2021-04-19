@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', redirectTo: 'hotels', pathMatch: 'full' },
   { path: 'users', component: UserlistComponent },
   { path: 'hotels', component: HotellistComponent },
   { path: 'bookings', component: BookinglistComponent },

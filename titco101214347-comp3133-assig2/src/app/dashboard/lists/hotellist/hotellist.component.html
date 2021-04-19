@@ -39,26 +39,20 @@
     <table class="table" id="table-hotelList">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Hotel ID</th>
                 <th scope="col">Hotel Name</th>
                 <th scope="col">Address</th>
+                <th scope="col">Price ($/Night)</th>
+                <th scope="col">Contact Email</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Hilton Inn</td>
-                <td>123 Hotel St</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Intercontinental</td>
-                <td>1 First St</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Super Hotel</td>
-                <td>100 Some St</td>
+            <tr *ngFor="let hotel of hotels">
+                <th scope="row">{{ hotel.hotel_id }}</th>
+                <td>{{ hotel.hotel_name }}</td>
+                <td>{{ hotel.street }}, {{ hotel.city }}, {{ hotel.postal_code }}</td>
+                <td>{{ hotel.price }}</td>
+                <td>{{ hotel.email }}</td>
             </tr>
         </tbody>
     </table>

@@ -1,12 +1,16 @@
 var express = require('express');
-const mongoose = require('mongoose');
+var cors = require('cors');
 
+const mongoose = require('mongoose');
 const hotelModel = require('./models/Hotel')
 const userModel = require('./models/User')
 const bookingModel = require('./models/Booking')
 
 var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
+var app = express();
+
+app.use(cors());
 
 var schema = buildSchema(
     `type Query {
@@ -14,6 +18,7 @@ var schema = buildSchema(
         getBookings: [Booking]
         getUsers: [User]
         getHotel(hotel_name: String, city: String): [Hotel]
+        getUser(username: String): [User]
     },
 
     type Mutation {
@@ -27,18 +32,20 @@ var schema = buildSchema(
             email: String,
             user_id: Int
         ): Hotel,
+
         addBooking(
-            hotel_id: Int,
-            booking_date: String,
-            booking_start: String,
-            booking_end: String,
-            user_id: Int
+            hotel_id: Int!,
+            booking_start: String!,
+            booking_end: String!,
+            user_id: Int!
         ): Booking,
+
         addUser(
-            user_id: Int,
-            username: String,
-            email: String,
-            password: String
+            firstname: String!,
+            lastname: String!,
+            username: String!,
+            email: String!,
+            password: String!
         ): User
     },
 
@@ -57,10 +64,12 @@ var schema = buildSchema(
         booking_date: String,
         booking_start: String,
         booking_end: String,
-        user_id: Int
+        user_id: Int,
     },
     type User {
         user_id: Int,
+        firstname: String,
+        lastname: String,
         username: String,
         email: String,
         password: String
@@ -84,25 +93,66 @@ var root = {
         const hotelResult = hotelModel.find({ $or: [{ hotel_name: args.hotel_name }, { city: args.city }] })
         return hotelResult
     },
+    getUser: (args) => {
+        const userResult = userModel.find({ username: args.username })
+        return userResult
+    },
     addUser: (args) => {
-        userModel.create(args, (err, res) => {
+        let user_count = 0
+        userModel.countDocuments({}, (err, count) => {
             if (err) {
-                console.log("Error. No duplicates allowed.");
+                console.log("error counting")
             }
             else {
-                console.log("Entry added successfully");
+                user_count = count
+                let newUser = new userModel({
+                    user_id: user_count + 1,
+                    firstname: args.firstname,
+                    lastname: args.lastname,
+                    username: args.username,
+                    email: args.email,
+                    password: args.password
+                })
+                newUser.save((err, res) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        console.log("Entry added successfully");
+                    }
+                })
             }
         })
     },
     addBooking: (args) => {
-        bookingModel.create(args, (err, res) => {
+        let booking_count = 0
+        let currentDate = new Date().toISOString().split('T')[0].toString()
+
+        bookingModel.countDocuments({}, (err, count) => {
             if (err) {
-                console.log("Booking could not be created.")
+                console.log("Error Counting DB")
             }
             else {
-                console.log("Booking success.")
+                booking_count = count
+                let newBooking = new bookingModel({
+                    hotel_id: args.hotel_id,
+                    booking_date: currentDate,
+                    booking_start: args.booking_start,
+                    booking_end: args.booking_end,
+                    user_id: args.user_id
+                })
+                console.log(newBooking)
+                newBooking.save((err, res) => {
+                    if (err) {
+                        console.log("Booking could not be created.")
+                    }
+                    else {
+                        console.log("Booking success.", res)
+                    }
+                })
             }
         })
+
     }
 };
 
@@ -111,7 +161,6 @@ mongoose.connect('mongodb+srv://rtitco:cluster_Password1!@cluster0.amhgt.mongodb
     useUnifiedTopology: true
 });
 
-var app = express();
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
