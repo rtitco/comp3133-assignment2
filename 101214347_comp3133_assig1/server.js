@@ -46,6 +46,15 @@ var schema = buildSchema(
             username: String!,
             email: String!,
             password: String!
+        ): User,
+
+        updateUser(
+            myid: Int,
+            firstname: String,
+            lastname: String,
+            username: String,
+            email: String,
+            password: String
         ): User
     },
 
@@ -77,6 +86,7 @@ var schema = buildSchema(
 );
 
 var root = {
+    //GET FUNCTIONS
     getHotels: () => {
         const HotelList = hotelModel.find({})
         return HotelList
@@ -97,6 +107,8 @@ var root = {
         const userResult = userModel.find({ username: args.username })
         return userResult
     },
+
+    //CREATE FUNCTIONS
     addUser: (args) => {
         let user_count = 0
         userModel.countDocuments({}, (err, count) => {
@@ -153,6 +165,37 @@ var root = {
             }
         })
 
+    },
+
+    //UPDATE FUNCTIONS
+    updateUser: (args) => {
+        console.log("Args:")
+        console.log(args)
+        console.log("Searching Database for entry to update")
+
+
+        userModel.findOne({ user_id: args.myid }, (err, foundUser) => {
+            if (err){
+                console.log("Error searching database.", err)
+            }
+            else{
+                console.log("User Found: ")
+                console.log(foundUser)
+                foundUser.firstname = args.firstname,
+                foundUser.lastname = args.lastname,
+                foundUser.username = args.username,
+                foundUser.email = args.email,
+                foundUser.password = args.password,
+                foundUser.save((err, savedUser) => {
+                    if (err){
+                        console.log("Error updating user")
+                    }
+                    else{
+                        console.log("Update Success")
+                    }
+                })
+            }
+        })
     }
 };
 

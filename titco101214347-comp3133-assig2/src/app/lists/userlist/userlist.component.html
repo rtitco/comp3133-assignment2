@@ -30,33 +30,32 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
-                <a routerLink="/" class="btn btn-dark">Logout</a>
+                <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Booking List</h3>
+    <h3>User List</h3>
 
-    <table class="table" id="table-bookingList">
+    <table class="table">
         <thead>
             <tr>
-                <th scope="col">Hotel ID</th>
-                <th scope="col">Check-In Date</th>
-                <th scope="col">Check-Out Date</th>
                 <th scope="col">User ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let booking of bookings">
-                <td>{{ booking.hotel_id }}</td>
-                <td>{{ booking.booking_start }}</td>
-                <td>{{ booking.booking_end }}</td>
-                <td>{{ booking.user_id }}</td>
+            <tr *ngFor="let user of users">
+                <th scope="row">{{ user.user_id }}</th>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
             </tr>
         </tbody>
     </table>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"

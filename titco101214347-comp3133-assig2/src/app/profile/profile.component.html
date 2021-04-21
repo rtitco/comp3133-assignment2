@@ -30,32 +30,41 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
-                <a routerLink="/" class="btn btn-dark">Logout</a>
+                <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>User List</h3>
+    <h3>Profile Information</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <th scope="row">{{ user.user_id }}</th>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="update-firstName" class="form-label">First Name: <span>{{err_FName}}</span></label>
+            <input type="text" [formControl]="firstName" class="form-control" id="update-firstName">
+        </div>
+        <div class="mb-3">
+            <label for="update-lastName" class="form-label">Last Name: <span>{{err_LName}}</span></label>
+            <input type="text" [formControl]="lastName" class="form-control" id="update-lastName">
+        </div>
+        <div class="mb-3">
+            <label for="update-username" class="form-label">Username: <span>{{err_UName}}</span></label>
+            <input type="text" [formControl]="username" class="form-control" id="update-username">
+        </div>
+        <div class="mb-3">
+            <label for="update-email" class="form-label">Username: <span>{{err_EMail}}</span></label>
+            <input type="text" [formControl]="email" class="form-control" id="update-email">
+        </div>
+        <div class="mb-3">
+            <label for="update-password" class="form-label">Password: <span>{{err_PWord}}</span></label>
+            <input type="password" [formControl]="password" class="form-control" id="update-password">
+        </div>
+
+        <button type="submit" class="mb-1 form-control btn btn-danger">Update</button>
+        <a routerLink="/dashboard" class="form-control btn btn-dark">Cancel</a>
+    </form>
+
+    <p>{{message}}</p>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"

@@ -30,34 +30,31 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
-                <a routerLink="/" class="btn btn-dark">Logout</a>
+                <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Create Booking Form</h3>
+    <h3>Booking List</h3>
 
-    <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label for="booking-hotelId" class="form-label">Hotel ID</label>
-            <input type="text" [formControl]="hotel_id" class="form-control" id="booking-hotelId" placeholder="Enter a hotel ID">
-        </div>
-        <div class="mb-3">
-            <label for="booking-checkinDate" class="form-label">Check-In Date</label>
-            <input type="date" [formControl]="booking_start" class="form-control" id="booking-checkinDate">
-        </div>
-        <div class="mb-3">
-            <label for="booking-checkoutDate" class="form-label">Check-Out Date</label>
-            <input type="date" [formControl]="booking_end" class="form-control" id="booking-checkoutDate">
-        </div>
-        <div class="mb-3">
-            <label for="booking-userId" class="form-label">Hotel ID</label>
-            <input type="text" [formControl]="user_id" class="form-control" id="booking-userId" placeholder="Enter your User ID">
-        </div>
-        <button type="submit" class="mb-1 form-control btn btn-danger">Update</button>
-        <a routerLink="/dashboard" class="form-control btn btn-dark">Cancel</a>
-    </form>
+    <table class="table" id="table-bookingList">
+        <thead>
+            <tr>
+                <th scope="col">Hotel ID</th>
+                <th scope="col">Check-In Date</th>
+                <th scope="col">Check-Out Date</th>
+                <th scope="col">User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookings">
+                <td>{{ booking.hotel_id }}</td>
+                <td>{{ booking.booking_start }}</td>
+                <td>{{ booking.booking_end }}</td>
+                <td>{{ booking.user_id }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <p>{{message}}</p>
 
 
 

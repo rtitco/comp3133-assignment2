@@ -30,35 +30,32 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
-                <a routerLink="/" class="btn btn-dark">Logout</a>
+                <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Profile Information</h3>
+    <h3>Hotel List</h3>
 
-    <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label for="register-firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="register-firstName" placeholder="Example input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="register-lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="register-lastName" placeholder="Example input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="register-username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="register-username" placeholder="Example input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="register-password" class="form-label">Password</label>
-            <input type="text" class="form-control" id="register-password" placeholder="Another input placeholder">
-        </div>
-
-        <button type="submit" class="mb-1 form-control btn btn-danger">Update</button>
-        <a routerLink="/dashboard" class="form-control btn btn-dark">Cancel</a>
-    </form>
-
-    <p>{{message}}</p>
+    <table class="table" id="table-hotelList">
+        <thead>
+            <tr>
+                <th scope="col">Hotel ID</th>
+                <th scope="col">Hotel Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Price ($/Night)</th>
+                <th scope="col">Contact Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hotel of hotels">
+                <th scope="row">{{ hotel.hotel_id }}</th>
+                <td>{{ hotel.hotel_name }}</td>
+                <td>{{ hotel.street }}, {{ hotel.city }}, {{ hotel.postal_code }}</td>
+                <td>{{ hotel.price }}</td>
+                <td>{{ hotel.email }}</td>
+            </tr>
+        </tbody>
+    </table>
 
 
 

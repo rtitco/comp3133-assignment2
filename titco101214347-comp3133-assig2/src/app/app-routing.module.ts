@@ -4,20 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 //Components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { UserlistComponent } from './dashboard/lists/userlist/userlist.component';
-import { BookinglistComponent } from './dashboard/lists/bookinglist/bookinglist.component';
-import { HotellistComponent } from './dashboard/lists/hotellist/hotellist.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { CreatebookingformComponent } from './dashboard/createbookingform/createbookingform.component';
+import { LoginComponent } from './forms/login/login.component';
+import { RegistrationComponent } from './forms/registration/registration.component';
+import { UserlistComponent } from './lists/userlist/userlist.component';
+import { BookinglistComponent } from './lists/bookinglist/bookinglist.component';
+import { HotellistComponent } from './lists/hotellist/hotellist.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CreatebookingformComponent } from './forms/createbookingform/createbookingform.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'dashboard', redirectTo: 'hotels', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent},
   { path: 'users', component: UserlistComponent },
   { path: 'hotels', component: HotellistComponent },
   { path: 'bookings', component: BookinglistComponent },

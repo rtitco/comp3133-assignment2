@@ -14,14 +14,17 @@ import {InMemoryCache} from '@apollo/client/core';
 
 //Components
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './forms/registration/registration.component';
+import { LoginComponent } from './forms/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HotellistComponent } from './dashboard/lists/hotellist/hotellist.component';
-import { UserlistComponent } from './dashboard/lists/userlist/userlist.component';
-import { BookinglistComponent } from './dashboard/lists/bookinglist/bookinglist.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { CreatebookingformComponent } from './dashboard/createbookingform/createbookingform.component';
+import { HotellistComponent } from './lists/hotellist/hotellist.component';
+import { UserlistComponent } from './lists/userlist/userlist.component';
+import { BookinglistComponent } from './lists/bookinglist/bookinglist.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CreatebookingformComponent } from './forms/createbookingform/createbookingform.component';
+import { GraphqlService } from './services/graphql.service';
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { CreatebookingformComponent } from './dashboard/createbookingform/create
     UserlistComponent,
     BookinglistComponent,
     ProfileComponent,
-    CreatebookingformComponent
+    CreatebookingformComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { CreatebookingformComponent } from './dashboard/createbookingform/create
       },
       deps: [HttpLink],
     },
+    GraphqlService
   ],
   bootstrap: [AppComponent]
 })

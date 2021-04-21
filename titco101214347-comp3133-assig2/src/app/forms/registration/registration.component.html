@@ -8,23 +8,23 @@
 
     <form (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label for="register-firstName" class="form-label">First Name</label>
+            <label for="register-firstName" class="form-label">First Name: <span>{{err_FName}}</span></label>
             <input type="text" [formControl]="firstName" class="form-control" id="register-firstName" placeholder="Enter first name here">
         </div>
         <div class="mb-3">
-            <label for="register-lastName" class="form-label">Last Name</label>
+            <label for="register-lastName" class="form-label">Last Name: <span>{{err_LName}}</span></label>
             <input type="text" [formControl]="lastName" class="form-control" id="register-lastName" placeholder="Enter last name here">
         </div>
         <div class="mb-3">
-            <label for="register-username" class="form-label">Username</label>
+            <label for="register-username" class="form-label">Username: <span>{{err_UName}}</span></label>
             <input type="text" [formControl]="username" class="form-control" id="register-username" placeholder="Enter username here">
         </div>
         <div class="mb-3">
-            <label for="register-email" class="form-label">Email</label>
+            <label for="register-email" class="form-label">Email: <span></span>{{err_EMail}}</label>
             <input type="text" [formControl]="email" class="form-control" id="register-email" placeholder="Enter email here">
         </div>
         <div class="mb-3">
-            <label for="register-password" class="form-label">Password</label>
+            <label for="register-password" class="form-label">Password: <span>{{err_PWord}}</span></label>
             <input type="password" [formControl]="password" class="form-control" id="register-password" placeholder="Enter password">
         </div>
 
