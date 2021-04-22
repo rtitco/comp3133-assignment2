@@ -1,0 +1,17 @@
+.page-container {
+    margin: auto;
+    margin-top: 5%;
+}
+
+.login-form {
+    padding: 2%;
+    border: solid 1px lightgray;
+    border-radius: 20px;
+    min-width: 15%;
+    width: 50%;
+    margin:auto
+}
+
+h2 {
+    text-align: center;
+}

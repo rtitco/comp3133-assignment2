@@ -15,9 +15,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" routerLink="/hotels">View Hotels</a>
                     </li>
                     <li class="nav-item">
@@ -27,37 +24,50 @@
                         <a class="nav-link" routerLink="/users">View Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
+                        <a class="nav-link active" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
+
+                <a class="profile-link" routerLink="/profile">Profile</a>
                 <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Create Booking Form</h3>
 
-    <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label for="booking-hotelId" class="form-label">Hotel ID: {{ err_hotelID }}</label>
-            <input type="text" [formControl]="hotel_id" class="form-control" id="booking-hotelId" placeholder="Enter a hotel ID">
-        </div>
-        <div class="mb-3">
-            <label for="booking-checkinDate" class="form-label">Check-In Date: {{ err_checkIn }}</label>
-            <input type="date" [formControl]="booking_start" class="form-control" id="booking-checkinDate">
-        </div>
-        <div class="mb-3">
-            <label for="booking-checkoutDate" class="form-label">Check-Out Date: {{ err_checkOut }}</label>
-            <input type="date" [formControl]="booking_end" class="form-control" id="booking-checkoutDate">
-        </div>
-        <div class="mb-3">
-            <label for="booking-userId" class="form-label">User ID: </label>
-            <input type="text" value="{{user_id}}" class="form-control" id="booking-userId" disabled>
-        </div>
-        <button type="submit" class="mb-1 form-control btn btn-danger">Update</button>
-        <a routerLink="/dashboard" class="form-control btn btn-dark">Cancel</a>
-    </form>
+    <div class="page-container">
+        <h3>Create Booking Form</h3>
 
-    <p>{{message}}</p>
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="booking-hotelId" class="form-label">Hotel ID: <span class="errMsg">{{ err_hotelID
+                        }}</span></label>
+                <select [formControl]="hotel_id" id="booking-hotelId" class="form-control">
+                    <option *ngFor="let hotel of hotels" value="{{hotel.hotel_id}}">{{hotel.hotel_id}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="booking-checkinDate" class="form-label">Check-In Date: <span class="errMsg">{{ err_checkIn
+                        }}</span></label>
+                <input type="date" [formControl]="booking_start" class="form-control" id="booking-checkinDate">
+            </div>
+            <div class="mb-3">
+                <label for="booking-checkoutDate" class="form-label">Check-Out Date: <span class="errMsg">{{
+                        err_checkOut }}</span></label>
+                <input type="date" [formControl]="booking_end" class="form-control" id="booking-checkoutDate">
+            </div>
+            <div class="mb-3">
+                <label for="booking-userId" class="form-label">User ID: </label>
+                <input type="text" value="{{user_id}}" class="form-control" id="booking-userId" disabled>
+            </div>
+
+            <span class="errMsg">{{message}}</span>
+
+            <button type="submit" class="mb-1 mt-1 form-control btn btn-danger">Update</button>
+            <a routerLink="/dashboard" class="mt-1 form-control btn btn-dark">Cancel</a>
+        </form>
+
+    </div>
+
 
 
 

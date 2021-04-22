@@ -12,7 +12,7 @@ import { InputvalidationService } from '../../services/inputvalidation.service';
 })
 
 export class RegistrationComponent implements OnInit {
-  message = ''
+  message:string = ''
   err_FName = ''
   err_LName = ''
   err_UName = ''
@@ -86,8 +86,9 @@ export class RegistrationComponent implements OnInit {
         this.username.value,
         this.email.value,
         this.password.value)
-        .subscribe(({ data }) => {
-          this.message = "New User Created."
+        .subscribe((res) => {
+          let x: any = res.data;
+          this.message = x.addUser
         }, (error) => {
           this.message = "Error creating user."
           console.log("there was an error sending the query", error)

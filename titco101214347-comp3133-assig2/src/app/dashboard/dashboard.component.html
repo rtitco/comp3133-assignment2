@@ -15,9 +15,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" routerLink="/hotels">View Hotels</a>
                     </li>
                     <li class="nav-item">
@@ -30,11 +27,49 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
+
+                <a class="profile-link" routerLink="/profile">Profile</a>
                 <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h1>Dashboard!</h1>
+
+    <div class="page-container">
+
+        <h2>Welcome, {{firstname}}</h2>
+
+        <div class="card-container">
+
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Find Hotels</h5>
+                    <p class="card-text">View and search through a list containing some of the best hotels in Ontario.
+                    </p>
+                    <a routerLink="/hotels" class="btn btn-danger">Go Now</a>
+                </div>
+            </div>
+
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">View Bookings</h5>
+                    <p class="card-text">View and search through a list containing all the bookings made to our hotels.
+                    </p>
+                    <a routerLink="/bookings" class="btn btn-danger">Go Now</a>
+                </div>
+            </div>
+
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">View Users</h5>
+                    <p class="card-text">View a list of all the users registered within the system.
+                    </p>
+                    <a routerLink="/users" class="btn btn-danger">Go Now</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
 
 
 

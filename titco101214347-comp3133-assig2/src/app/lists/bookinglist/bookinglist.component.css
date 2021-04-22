@@ -1,0 +1,10 @@
+.page-container {
+    margin: auto;
+    padding: 1% 5% 10% 5%;
+}
+
+.profile-link {
+    margin-right: 1%;
+    text-decoration: none;
+    color: black;
+}

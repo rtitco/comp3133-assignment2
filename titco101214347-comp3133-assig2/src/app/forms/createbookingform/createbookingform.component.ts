@@ -14,6 +14,8 @@ import { GraphqlService } from '../../services/graphql.service';
 
 export class CreatebookingformComponent implements OnInit {
   currentUser = [] as any;
+  hotels = [] as any;
+
   message = ""
   err_hotelID = ""
   err_checkIn = ""
@@ -34,6 +36,10 @@ export class CreatebookingformComponent implements OnInit {
     }
     else {
       this.user_id = JSON.parse(this.currentUser).user_id
+
+      this.service.getList("hotels").subscribe((res: any) => {
+        this.hotels = res?.data?.getHotels;
+      })
     }
   }
 
@@ -43,6 +49,7 @@ export class CreatebookingformComponent implements OnInit {
     var validCheckOut = false
     let regex_hotelID = new RegExp(/[\d]{1,5}/)
 
+    console.log(this.hotel_id.value)
     if (this.hotel_id.value.match(regex_hotelID) == null || this.hotel_id.value == '') {
       this.err_hotelID = "Invalid Hotel Selection"
     }
@@ -73,7 +80,7 @@ export class CreatebookingformComponent implements OnInit {
         parseInt(this.hotel_id.value),
         this.booking_start.value,
         this.booking_end.value,
-        parseInt(this.user_id.value)
+        parseInt(this.user_id)
       )
         .subscribe(({ data }) => {
           console.log('got data', data);

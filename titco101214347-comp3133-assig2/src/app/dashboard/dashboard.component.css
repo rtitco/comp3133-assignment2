@@ -1,0 +1,21 @@
+.page-container {
+    margin: auto;
+    margin-top: 1%;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1%;
+}
+
+.profile-link {
+    margin-right: 1%;
+    text-decoration: none;
+    color: black;
+}
+
+h2 {
+    margin-left: 2%;
+}

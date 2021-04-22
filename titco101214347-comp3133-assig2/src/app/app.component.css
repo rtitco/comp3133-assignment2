@@ -1,0 +1,26 @@
+.app-container {
+    min-height: 100vh;
+    position: relative;
+}
+
+.title-banner {
+    padding: 1%;
+    background-color: #dbe9ee;
+}
+
+.component-container {
+    
+}
+
+.footer-styling {
+    padding: 1%;
+    background-color: #2c363f;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer-name{
+    font-size: 1.5rem;
+    color: white;
+}

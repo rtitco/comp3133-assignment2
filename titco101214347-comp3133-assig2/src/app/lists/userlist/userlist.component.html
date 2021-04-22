@@ -15,47 +15,50 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" routerLink="/hotels">View Hotels</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/bookings">View Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/users">View Users</a>
+                        <a class="nav-link active" routerLink="/users">View Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
+                <a class="profile-link" routerLink="/profile">Profile</a>
                 <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>User List</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <th scope="row">{{ user.user_id }}</th>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="page-container">
+        <h3>User List</h3>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <th scope="row">{{ user.user_id }}</th>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"

@@ -17,7 +17,7 @@ var schema = buildSchema(
         getHotels: [Hotel]
         getBookings: [Booking]
         getUsers: [User]
-        getHotel(hotel_name: String, city: String): [Hotel]
+        getHotel(searchTerm: String): [Hotel]
         getUser(username: String): [User]
     },
 
@@ -46,7 +46,7 @@ var schema = buildSchema(
             username: String!,
             email: String!,
             password: String!
-        ): User,
+        ): String,
 
         updateUser(
             myid: Int,
@@ -100,7 +100,7 @@ var root = {
         return UserList
     },
     getHotel: (args) => {
-        const hotelResult = hotelModel.find({ $or: [{ hotel_name: args.hotel_name }, { city: args.city }] })
+        const hotelResult = hotelModel.find({ $or: [{ hotel_name: { $regex: args.searchTerm } }, { city: { $regex: args.searchTerm } }] })
         return hotelResult
     },
     getUser: (args) => {
@@ -109,32 +109,57 @@ var root = {
     },
 
     //CREATE FUNCTIONS
-    addUser: (args) => {
+    addUser: async (args) => {
         let user_count = 0
-        userModel.countDocuments({}, (err, count) => {
-            if (err) {
-                console.log("error counting")
-            }
-            else {
+        let duplicateExists = true;
+
+        await userModel.countDocuments({}, (err, count) => {
+            if (count) {
                 user_count = count
-                let newUser = new userModel({
-                    user_id: user_count + 1,
-                    firstname: args.firstname,
-                    lastname: args.lastname,
-                    username: args.username,
-                    email: args.email,
-                    password: args.password
-                })
-                newUser.save((err, res) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-                        console.log("Entry added successfully");
-                    }
-                })
             }
         })
+
+        await userModel.find({ $or: [{ username: args.username }, { email: args.email }] }, (err, duplicate) => {})
+            .exec()
+            .then(
+                (e) => {
+                    if (e.length != 0) {
+                        duplicateExists = true
+                        return "User Already Exists?";
+                    }
+                    else {
+                        duplicateExists = false
+                    }
+                }
+            );
+
+        if (duplicateExists) {
+            return "It exists";
+        }
+        else {
+            let newUser = new userModel({
+                user_id: user_count + 1,
+                firstname: args.firstname,
+                lastname: args.lastname,
+                username: args.username,
+                email: args.email,
+                password: args.password
+            })
+
+            return await newUser.save()
+                .then(
+                    (res, err) => {
+
+                        if (res) {
+                            return "SAved users? "
+                        }
+                        else if (err) {
+                            console.log("Error: ", err);
+                            return "Error saving user"
+                        }
+                    }
+                )
+        }
     },
     addBooking: (args) => {
         let booking_count = 0
@@ -175,25 +200,25 @@ var root = {
 
 
         userModel.findOne({ user_id: args.myid }, (err, foundUser) => {
-            if (err){
+            if (err) {
                 console.log("Error searching database.", err)
             }
-            else{
+            else {
                 console.log("User Found: ")
                 console.log(foundUser)
                 foundUser.firstname = args.firstname,
-                foundUser.lastname = args.lastname,
-                foundUser.username = args.username,
-                foundUser.email = args.email,
-                foundUser.password = args.password,
-                foundUser.save((err, savedUser) => {
-                    if (err){
-                        console.log("Error updating user")
-                    }
-                    else{
-                        console.log("Update Success")
-                    }
-                })
+                    foundUser.lastname = args.lastname,
+                    foundUser.username = args.username,
+                    foundUser.email = args.email,
+                    foundUser.password = args.password,
+                    foundUser.save((err, savedUser) => {
+                        if (err) {
+                            console.log("Error updating user")
+                        }
+                        else {
+                            console.log("Update Success")
+                        }
+                    })
             }
         })
     }

@@ -4,25 +4,31 @@
 </head>
 
 <body>
-    <h1>Login Page</h1>
 
-    <form (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-            <label for="login-username" class="form-label">Username</label>
-            <input type="text" [formControl]="username" class="form-control" id="login-username"
-                placeholder="Example input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="login-password" class="form-label">Password</label>
-            <input type="password" [formControl]="password" class="form-control" id="login-password"
-                placeholder="Another input placeholder">
-        </div>
+    <div class="page-container">
 
-        <p>{{message}}</p>
-        
-        <input type="submit" class="form-control btn btn-danger">
-    </form>
-    <a routerLink="/register"> Don't have an account? Register here.</a>
+        <form (ngSubmit)="onSubmit()" class="login-form">
+            <h2>User Login</h2>
+
+            <div class="mb-3 pt-3">
+                <label for="login-username" class="form-label">Username</label>
+                <input type="text" [formControl]="username" class="form-control" id="login-username"
+                    placeholder="Example input placeholder">
+            </div>
+            <div class="mb-3">
+                <label for="login-password" class="form-label">Password</label>
+                <input type="password" [formControl]="password" class="form-control" id="login-password"
+                    placeholder="Another input placeholder">
+            </div>
+
+            <p>{{message}}</p>
+
+            <input type="submit" class="form-control btn btn-danger">
+            <a routerLink="/register"> Don't have an account? Register here.</a>
+        </form>
+
+    </div>
+
 
 
 

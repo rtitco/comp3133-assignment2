@@ -15,10 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/hotels">View Hotels</a>
+                        <a class="nav-link active" routerLink="/hotels">View Hotels</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/bookings">View Bookings</a>
@@ -30,32 +27,52 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
+
+                <a class="profile-link" routerLink="/profile">Profile</a>
                 <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Hotel List</h3>
 
-    <table class="table" id="table-hotelList">
-        <thead>
-            <tr>
-                <th scope="col">Hotel ID</th>
-                <th scope="col">Hotel Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Price ($/Night)</th>
-                <th scope="col">Contact Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let hotel of hotels">
-                <th scope="row">{{ hotel.hotel_id }}</th>
-                <td>{{ hotel.hotel_name }}</td>
-                <td>{{ hotel.street }}, {{ hotel.city }}, {{ hotel.postal_code }}</td>
-                <td>{{ hotel.price }}</td>
-                <td>{{ hotel.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="page-container">
+
+        <h3>Hotel List</h3>
+        <div class="search-container">
+
+            <form class="search-bar" (ngSubmit)="searchHotels(this.searchTerm.value)">
+                <input class="form-control" [formControl]="searchTerm" type="search"
+                    placeholder="Search for a hotel name or city" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+        </div>
+
+        <div class="table-container">
+            <table class="table table-striped" id="table-hotelList">
+                <thead>
+                    <tr>
+                        <th scope="col">Hotel ID</th>
+                        <th scope="col">Hotel Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Price ($/Night)</th>
+                        <th scope="col">Contact Email</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let hotel of hotels">
+                        <th scope="row">{{ hotel.hotel_id }}</th>
+                        <td>{{ hotel.hotel_name }}</td>
+                        <td>{{ hotel.street }}, {{ hotel.city }}, {{ hotel.postal_code }}</td>
+                        <td>{{ hotel.price }}</td>
+                        <td>{{ hotel.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 
 
 

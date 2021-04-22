@@ -15,13 +15,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" routerLink="/hotels">View Hotels</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/bookings">View Bookings</a>
+                        <a class="nav-link active" routerLink="/bookings">View Bookings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/users">View Users</a>
@@ -30,30 +27,36 @@
                         <a class="nav-link" routerLink="/bookings/add">Make a Booking</a>
                     </li>
                 </ul>
+
+                <a class="profile-link" routerLink="/profile">Profile</a>
                 <button (click)="logout()" class="btn btn-dark">Logout</button>
             </div>
         </div>
     </nav>
-    <h3>Booking List</h3>
 
-    <table class="table" id="table-bookingList">
-        <thead>
-            <tr>
-                <th scope="col">Hotel ID</th>
-                <th scope="col">Check-In Date</th>
-                <th scope="col">Check-Out Date</th>
-                <th scope="col">User ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let booking of bookings">
-                <td>{{ booking.hotel_id }}</td>
-                <td>{{ booking.booking_start }}</td>
-                <td>{{ booking.booking_end }}</td>
-                <td>{{ booking.user_id }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="page-container">
+        <h3>Booking List</h3>
+
+        <table class="table table-striped" id="table-bookingList">
+            <thead>
+                <tr>
+                    <th scope="col">Hotel ID</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Check-In Date</th>
+                    <th scope="col">Check-Out Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let booking of bookings">
+                    <td>{{ booking.hotel_id }}</td>
+                    <td>{{ booking.user_id }}</td>
+                    <td>{{ booking.booking_start }}</td>
+                    <td>{{ booking.booking_end }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 
 
 

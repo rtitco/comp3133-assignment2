@@ -6,21 +6,26 @@ import { Router } from '@angular/router';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: [ GraphqlService ]
+  providers: [GraphqlService]
 })
 export class DashboardComponent implements OnInit {
   currentUser = [] as any;
+  firstname = '';
 
   constructor(private router: Router, private service: GraphqlService) { }
 
   ngOnInit() {
     this.currentUser = this.service.getSessionUser()
-    if(this.currentUser == null){
+    if (this.currentUser == null) {
       this.router.navigate(['/login']);
+    }
+    else {
+      this.firstname = JSON.parse(this.currentUser).firstname;
+      console.log(this.currentUser)
     }
   }
 
-  logout(){
+  logout() {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }

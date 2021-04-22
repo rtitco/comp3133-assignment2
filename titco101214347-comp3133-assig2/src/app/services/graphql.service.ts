@@ -37,6 +37,19 @@ query getHotels{
   }
 }
 `
+const FIND_HOTEL = gql`
+query getHotel( $searchTerm: String ){
+  getHotel(searchTerm: $searchTerm){
+    hotel_id
+    hotel_name
+    street
+    city
+    price
+    postal_code
+    email
+  }
+}
+`
 const LOGIN_USER = gql`
 query getUser($username: String!){
   getUser(
@@ -77,10 +90,7 @@ mutation AddUser($firstname: String!, $lastname: String!, $username: String!, $e
     username: $username,
     email: $email,
     password: $password
-  ){
-    firstname
-    lastname
-  }
+  )
 }
 `
 
@@ -138,6 +148,17 @@ export class GraphqlService {
       query: gqlquery
     })
     .valueChanges
+  }
+
+  getHotel(searchTerm: string){
+    return this.apollo
+      .watchQuery({
+        query: FIND_HOTEL,
+        variables: {
+          searchTerm: searchTerm
+        }
+      })
+      .valueChanges
   }
 
   checkLogin(usernameInput: string){
